@@ -1,6 +1,8 @@
 # Github Profile Finder
 
-[Live Demo](https://friendly-colden-1f52e0.netlify.app/)
+## Live Demo
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/9ab7452d-86b1-4953-9df6-ca2c7f9ee2c9/deploy-status)](https://friendly-colden-1f52e0.netlify.app/)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
