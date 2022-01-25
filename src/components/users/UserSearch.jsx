@@ -5,7 +5,7 @@ import GithubContext from "../../context/github/GithubContext"
 function UserSearch() {
     const [ text, setText ] = useState("")
     const { users, searchUsers, clearUsers } = useContext(GithubContext)
-    const { alert, setAlert } = useContext(AlertContext)
+    const { setAlert } = useContext(AlertContext)
 
     const handleTextChange = (e) => setText(e.target.value)
 
@@ -20,20 +20,20 @@ function UserSearch() {
         }
     }
 
-  return <div className="grid grid-cols-1 xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-2 mb-8 gap-8">
+  return <div className="mb-8 md:flex justify-center items-center">
       <div>
           <form onSubmit={handleSubmit}>
               <div className="form-control">
                   <div className="relative">
-                      <input value={text} onChange={handleTextChange} placeholder="Search" type="text" className="w-full pr-40 bg-gray-200 input input-lg text-black" />
-                      <button type="submit" className="absolute top-0 right-0 rounded-l-none w-36 btn btn-lg">Go</button>
+                      <input value={text} onChange={handleTextChange} placeholder="Search" type="text" className="w-full pr-40 bg-gray-200 input input-md text-black" />
+                      <button type="submit" className="absolute top-0 right-0 rounded-l-none w-32 md:w-20 btn btn-md">Go</button>
                   </div>
               </div>
           </form>
       </div>
       { users.length > 0 && (
             <div>
-                <button onClick={clearUsers} className="btn btn-ghost btn-lg">Clear</button>
+                <button onClick={clearUsers} className="ml-4 btn btn-ghost btn-md">Clear</button>
             </div>
       ) }
   </div>;

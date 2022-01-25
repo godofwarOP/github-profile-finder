@@ -95,7 +95,7 @@ function User() {
                 Website
               </div>
               <div className="text-lg stat-value">
-                <a href={`https://${blog}`} target="_blank" rel="noreferrer">{blog}</a>
+                <a href={`https://${blog.replace('https://',"")}`} target="_blank" rel="noreferrer">{blog}</a>
               </div>
             </div>
           )}

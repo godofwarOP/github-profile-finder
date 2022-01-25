@@ -14,11 +14,13 @@ function App() {
     <GithubProvider>
       <AlertProvider>
         <Router>
-          <div className="flex flex-col justify-between h-screen">
+          <div className="flex flex-col justify-between items-center h-screen">
             <Navbar />
 
-            <main className="container mx-auto px-3 pb-12">
-              <Alert />
+            <main className="container mx-auto px-3 pb-12 flex-1">
+              <div className="text-center">
+                <Alert />
+              </div>
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/about" element={<About />} />
