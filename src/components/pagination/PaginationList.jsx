@@ -4,7 +4,11 @@ import PaginationContext from "../../context/pagination/PaginationContext";
 import PaginationItem from "./PaginationItem";
 
 function PaginationList() {
+<<<<<<< HEAD
   const { page, incrementPageCount, decrementPageCount } =
+=======
+  const { incrementPageCount, decrementPageCount } =
+>>>>>>> 65169e2 (added pagination support)
     useContext(PaginationContext);
   const { totalCount } = useContext(GithubContext);
   const totalPages = Math.round(totalCount / 10);
