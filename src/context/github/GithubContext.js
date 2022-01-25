@@ -8,27 +8,35 @@ const GITHUB_URL = process.env.REACT_APP_GITHUB_URL;
 export const GithubProvider = ({ children }) => {
   const initialState = {
     users: [],
+    totalCount: 0,
     repos: [],
     loading: false,
     user: {},
+    search: "",
   };
 
   const [state, dispatch] = useReducer(githubReducer, initialState);
 
-  const searchUsers = async (text) => {
+  const searchUsers = async (text, page) => {
     setLoading();
 
     const params = new URLSearchParams({
       q: text,
+      page,
+      per_page: 30,
     });
 
     const response = await fetch(`${GITHUB_URL}/search/users?${params}`);
 
-    const { items } = await response.json();
+    const { items, total_count } = await response.json();
 
     dispatch({
       type: "GET_USERS",
-      payload: items,
+      payload: {
+        items,
+        search: text,
+        total_count,
+      },
     });
   };
 
@@ -84,6 +92,8 @@ export const GithubProvider = ({ children }) => {
         users: state.users,
         loading: state.loading,
         repos: state.repos,
+        search: state.search,
+        totalCount: state.totalCount,
         searchUsers,
         clearUsers,
         getUser,

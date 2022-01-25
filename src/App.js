@@ -7,33 +7,36 @@ import Footer from "./components/layout/Footer";
 import Alert from "./components/layout/Alert";
 import { GithubProvider } from "./context/github/GithubContext";
 import { AlertProvider } from "./context/alert/AlertContext";
+import { PaginationProvider } from "./context/pagination/PaginationContext";
 import User from "./pages/User";
 
 function App() {
   return (
     <GithubProvider>
-      <AlertProvider>
-        <Router>
-          <div className="flex flex-col justify-between items-center h-screen">
-            <Navbar />
+      <PaginationProvider>
+        <AlertProvider>
+          <Router>
+            <div className="flex flex-col justify-between items-center h-screen">
+              <Navbar />
 
-            <main className="container mx-auto px-3 pb-12 flex-1">
-              <div className="text-center">
-                <Alert />
-              </div>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/user/:login" element={<User />} />
-                <Route path="/404" element={<Error />} />
-                <Route path="/*" element={<Error />} />
-              </Routes>
-            </main>
+              <main className="container mx-auto px-3 pb-12 flex-1">
+                <div className="text-center">
+                  <Alert />
+                </div>
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/about" element={<About />} />
+                  <Route path="/user/:login" element={<User />} />
+                  <Route path="/404" element={<Error />} />
+                  <Route path="/*" element={<Error />} />
+                </Routes>
+              </main>
 
-            <Footer />
-          </div>
-        </Router>
-      </AlertProvider>
+              <Footer />
+            </div>
+          </Router>
+        </AlertProvider>
+      </PaginationProvider>
     </GithubProvider>
   );
 }
