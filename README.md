@@ -1,6 +1,6 @@
 # Github Profile Finder
 
-[Live Demo]()
+[Live Demo](https://friendly-colden-1f52e0.netlify.app/)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
