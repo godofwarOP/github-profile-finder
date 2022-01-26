@@ -19,6 +19,7 @@ export const PaginationProvider = ({ children }) => {
     if (state.page === 5) {
       return;
     } else {
+      dispatch({ type: "SET_LOADING" });
       paginationDispatch({
         type: "INCREMENT_COUNT",
       });
@@ -39,6 +40,7 @@ export const PaginationProvider = ({ children }) => {
     if (state.page === 1) {
       return;
     } else {
+      dispatch({ type: "SET_LOADING" });
       paginationDispatch({
         type: "DECREMENT_COUNT",
       });
