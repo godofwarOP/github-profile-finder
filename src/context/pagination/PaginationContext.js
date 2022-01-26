@@ -1,6 +1,7 @@
 import { createContext, useReducer, useContext } from "react";
 import GithubContext from "../github/GithubContext";
 import paginationReducer from "./PaginationReducer";
+import { searchUsers } from "../github/GithubActions";
 
 const PaginationContext = createContext();
 
@@ -8,46 +9,50 @@ export const PaginationProvider = ({ children }) => {
   const initlalState = {
     page: 1,
   };
-  const [state, dispatch] = useReducer(paginationReducer, initlalState);
-  const { searchUsers, search, totalCount } = useContext(GithubContext);
-  const totalPages = Math.round(totalCount / 30);
+  const [state, paginationDispatch] = useReducer(
+    paginationReducer,
+    initlalState
+  );
+  const { search, dispatch } = useContext(GithubContext);
 
-  const incrementPageCount = () => {
-    if (totalPages > 5) {
-      if (state.page === 5) {
-        return;
-      } else {
-        if (state.page === totalPages) {
-          return;
-        } else {
-          dispatch({
-            type: "INCREMENT_COUNT",
-          });
-
-          searchUsers(search, state.page + 1);
-        }
-      }
+  const incrementPageCount = async () => {
+    if (state.page === 5) {
+      return;
     } else {
-      if (state.page === totalPages) {
-        return;
-      } else {
-        dispatch({
-          type: "INCREMENT_COUNT",
-        });
+      dispatch({ type: "SET_LOADING" });
+      paginationDispatch({
+        type: "INCREMENT_COUNT",
+      });
 
-        searchUsers(search, state.page + 1);
-      }
+      const users = await searchUsers(search, state.page + 1);
+      dispatch({
+        type: "GET_USERS",
+        payload: {
+          items: users.items,
+          search: search,
+          total_count: users.total_count,
+        },
+      });
     }
   };
 
-  const decrementPageCount = () => {
+  const decrementPageCount = async () => {
     if (state.page === 1) {
       return;
     } else {
-      dispatch({
+      dispatch({ type: "SET_LOADING" });
+      paginationDispatch({
         type: "DECREMENT_COUNT",
       });
-      searchUsers(search, state.page - 1);
+      const users = await searchUsers(search, state.page - 1);
+      dispatch({
+        type: "GET_USERS",
+        payload: {
+          items: users.items,
+          search: search,
+          total_count: users.total_count,
+        },
+      });
     }
   };
 
